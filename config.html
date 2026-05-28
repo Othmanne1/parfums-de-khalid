@@ -212,7 +212,7 @@
             return setDoc(doc(window.db, "config", "main"), config);
         })
         .then(() => {
-            alert('تم حفظ التعديلات بنجاح في Firebase وغاتبان عند كاع الناس دابا!');
+           fetch('https://api.netlify.com/build_hooks/6a18ac540a469a34a01cf6bd').then(() => console.log('Netlify Rebuild Started!')).catch(err => console.error(err)); alert('تم حفظ التعديلات بنجاح فـ Firebase والموقع كيتحدث دابا!');
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
