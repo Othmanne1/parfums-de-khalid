@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Configuration - Parfums de Khalid</title>
+  <style>
+    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:#f7f3ee;color:#222}
+    .container{max-width:980px;margin:0 auto;padding:1rem}
+    h1{margin:0 0 1rem;color:#8b5e3c}
+    .panel{background:#fff;padding:1.2rem;border-radius:14px;box-shadow:0 16px 35px rgba(0,0,0,.08)}
+    label{display:block;margin:.9rem 0 0.35rem;color:#555}
+    input,textarea{width:100%;padding:.75rem;border-radius:10px;border:1px solid #ddd;font-size:1rem}
+    textarea{min-height:220px}
+    .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .actions button,a{padding:.75rem 1rem;border-radius:10px;border:none;text-decoration:none;color:#fff;cursor:pointer}
+    .btn-save{background:#8b5e3c}
+    .btn-reset{background:#555}
+    .note{margin:1rem 0;color:#666;font-size:.95rem;line-height:1.5}
+    .link-home{margin-bottom:1rem;display:inline-block;color:#8b5e3c}
+    pre{background:#f1ece7;padding:1rem;border-radius:10px;overflow:auto}
+    .info-block{background:#fff9f5;border:1px solid #f0d6c2;color:#6d4a34;padding:1rem;border-radius:12px;margin:1rem 0}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="link-home" href="index.html">← Retour au site</a>
+    <h1>Panel de configuration</h1>
+    <div class="panel">
+      <p class="note">Modifiez l'apparence et les images du site ici. Sauvegardez, puis rechargez <strong>index.html</strong> pour voir les changements.</p>
+      <label>Titre du hero</label>
+      <input id="heroTitle" type="text" />
+      <label>Sous-titre du hero</label>
+      <input id="heroSubtitle" type="text" />
+      <label>Texte du caption</label>
+      <input id="heroCaption" type="text" />
+      <label>Image du hero (URL)</label>
+      <input id="heroImage" type="text" />
+      <label>Choisir une image de hero locale</label>
+      <input id="heroImageFile" type="file" accept="image/*" />
+      <div class="hero-preview" style="margin:.75rem 0;display:flex;gap:.75rem;align-items:center;">
+        <img id="heroImagePreview" src="https://source.unsplash.com/1200x800/?perfume,bottle" alt="Aperçu hero" style="width:120px;height:80px;object-fit:cover;border-radius:10px;border:1px solid #ddd" />
+        <span style="color:#666;font-size:.95rem">Aperçu de l'image du hero. Choisissez un fichier pour remplacer l'URL.</span>
+      </div>
+      <label>Numéro WhatsApp (sans +, ex. 212712233293)</label>
+      <input id="whatsappNumber" type="text" />
+      <div class="info-block">Vous pouvez modifier chaque produit ci-dessous et choisir une image depuis votre ordinateur. Les images sélectionnées sont sauvegardées localement dans le navigateur.</div>
+      <div id="productsEditor" class="product-list"></div>
+      <div class="actions">
+        <button id="saveBtn" class="btn-save">Enregistrer la configuration</button>
+        <button id="resetBtn" class="btn-reset">Réinitialiser aux valeurs par défaut</button>
+      </div>
+    </div>
+    <p class="note">Modifiez les produits ci-dessous et sélectionnez une image locale si nécessaire. Après l'enregistrement, rechargez <code>index.html</code>.</p>
+  </div>
+  <script>
+    const DEFAULT_CONFIG = {
+      hero: {
+        title: 'Les meilleurs parfums, livraison rapide',
+        subtitle: 'Choisissez, ajoutez au panier et commandez via WhatsApp.',
+        caption: 'Authentic fragrances · Qualité garantie',
+        image: 'https://source.unsplash.com/1200x800/?perfume,bottle',
+      },
+      whatsappNumber: '212712233293',
+      products: [
+        {id:1,name:'Bleu de Chanel (Eau de Parfum)',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=1'},
+        {id:2,name:'Acqua Di Giò - Giorgio Armani (Pour Homme)',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=2'},
+        {id:3,name:'Y - Yves Saint Laurent (Eau de Parfum)',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=3'},
+        {id:4,name:'Light Blue - Dolce & Gabbana (Pour Homme)',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=4'},
+        {id:5,name:'Aventus - Creed',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=5'},
+        {id:6,name:'Acqua Di Giò Profondo - Giorgio Armani',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=6'},
+        {id:7,name:'Arabians - Montale Paris',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=7'},
+        {id:8,name:'Y - Yves Saint Laurent (Eau de Toilette / Le Parfum)',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=8'},
+        {id:9,name:'Stronger With You - Emporio Armani',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=9'},
+        {id:10,name:'Coffret "Le Beau" - Jean Paul Gaultier (3x40ml)',price:300,image:'https://source.unsplash.com/400x400/?perfume,gift,box&sig=10'},
+        {id:11,name:'Scandal Pour Homme - Jean Paul Gaultier',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=11'},
+        {id:12,name:'Le Beau Le Parfum - Jean Paul Gaultier',price:300,image:'https://source.unsplash.com/400x400/?perfume,bottle&sig=12'},
+      ]
+    };
+
+    const heroTitle = document.getElementById('heroTitle')
+    const heroSubtitle = document.getElementById('heroSubtitle')
+    const heroCaption = document.getElementById('heroCaption')
+    const heroImage = document.getElementById('heroImage')
+    const heroImageFile = document.getElementById('heroImageFile')
+    const heroImagePreview = document.getElementById('heroImagePreview')
+    const whatsappNumber = document.getElementById('whatsappNumber')
+    const saveBtn = document.getElementById('saveBtn')
+    const resetBtn = document.getElementById('resetBtn')
+
+    function loadConfig(){
+      const saved = JSON.parse(localStorage.getItem('siteConfig') || 'null');
+      return saved ? {...DEFAULT_CONFIG,...saved, hero:{...DEFAULT_CONFIG.hero,...saved.hero}, products:saved.products||DEFAULT_CONFIG.products} : DEFAULT_CONFIG
+    }
+
+    const productsEditor = document.getElementById('productsEditor')
+
+    function fillForm(config){
+      heroTitle.value = config.hero.title
+      heroSubtitle.value = config.hero.subtitle
+      heroCaption.value = config.hero.caption
+      heroImage.value = config.hero.image
+      heroImagePreview.src = config.hero.image
+      whatsappNumber.value = config.whatsappNumber
+      renderProductsEditor(config.products)
+    }
+
+    heroImageFile.addEventListener('change', event => {
+      const file = event.target.files[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = () => {
+        const dataUrl = reader.result
+        heroImage.value = dataUrl
+        heroImagePreview.src = dataUrl
+      }
+      reader.readAsDataURL(file)
+    })
+
+    heroImage.addEventListener('input', () => {
+      heroImagePreview.src = heroImage.value.trim() || DEFAULT_CONFIG.hero.image
+    })
+
+    function createProductCard(product){
+      const card = document.createElement('div')
+      card.className = 'product-card'
+      card.innerHTML = `
+        <h2>Produit #${product.id}</h2>
+        <div class="product-row">
+          <label>Nom
+            <input data-field="name" data-id="${product.id}" type="text" value="${product.name}" />
+          </label>
+          <label>Prix (DH)
+            <input data-field="price" data-id="${product.id}" type="number" min="0" value="${product.price}" />
+          </label>
+        </div>
+        <div class="product-row full">
+          <label>URL de l'image
+            <input data-field="image" data-id="${product.id}" type="text" value="${product.image}" />
+          </label>
+        </div>
+        <div class="product-row full">
+          <label>Choisir une image locale
+            <input data-field="file" data-id="${product.id}" type="file" accept="image/*" />
+          </label>
+          <div class="product-preview">
+            <img id="preview-${product.id}" src="${product.image}" alt="Aperçu ${product.name}" />
+            <div class="file-note">Aperçu de l'image. Sélectionnez un fichier pour remplacer l'URL.</div>
+          </div>
+        </div>
+      `
+      const fileInput = card.querySelector('input[data-field="file"]')
+      const imageInput = card.querySelector('input[data-field="image"]')
+      const preview = card.querySelector(`#preview-${product.id}`)
+
+      fileInput.addEventListener('change', async event => {
+        const file = event.target.files[0]
+        if (!file) return
+        const reader = new FileReader()
+        reader.onload = () => {
+          const dataUrl = reader.result
+          imageInput.value = dataUrl
+          preview.src = dataUrl
+        }
+        reader.readAsDataURL(file)
+      })
+
+      imageInput.addEventListener('input', () => {
+        preview.src = imageInput.value.trim() || DEFAULT_CONFIG.hero.image
+      })
+
+      return card
+    }
+
+    function renderProductsEditor(products){
+      productsEditor.innerHTML = ''
+      products.forEach(product => {
+        productsEditor.appendChild(createProductCard(product))
+      })
+    }
+
+    function saveConfig(){
+    const products = []
+    const cardEls = productsEditor.querySelectorAll('.product-card')
+    cardEls.forEach(card => {
+        const id = Number(card.querySelector('input[data-field="name"]').dataset.id)
+        const name = card.querySelector('input[data-field="name"]').value.trim()
+        const price = Number(card.querySelector('input[data-field="price"]').value) || 0
+        const image = card.querySelector('input[data-field="image"]').value.trim()
+        products.push({id, name, price, image: image || DEFAULT_CONFIG.products[id-1].image})
+    })
+
+    const config = {
+        hero: {
+            title: heroTitle.value.trim() || DEFAULT_CONFIG.hero.title,
+            subtitle: heroSubtitle.value.trim() || DEFAULT_CONFIG.hero.subtitle,
+            caption: heroCaption.value.trim() || DEFAULT_CONFIG.hero.caption,
+            image: heroImage.value.trim() || DEFAULT_CONFIG.hero.image,
+        },
+        whatsappNumber: whatsappNumber.value.trim() || DEFAULT_CONFIG.whatsappNumber,
+        products: products
+    };
+
+    // حفظ كاحتياط في المتصفح
+    localStorage.setItem('siteConfig', JSON.stringify(config));
+
+    // إرسال التعديلات لـ Firebase لايف
+    if (window.db) {
+        // استيراد دالات الحفظ الخاصة بالنسخة الجديدة ديناميكياً
+        import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js")
+        .then(({ doc, setDoc }) => {
+            return setDoc(doc(window.db, "config", "main"), config);
+        })
+        .then(() => {
+            alert('تم حفظ التعديلات بنجاح في Firebase وغاتبان عند كاع الناس دابا!');
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+            alert('وقع خطأ أثناء الحفظ في Firebase');
+        });
+    } else {
+        alert('تنبيه: التعديل تم محلياً فقط لأن Firebase غير متصل');
+    }
+}
+
+function resetConfig(){
+    localStorage.removeItem('siteConfig')
+    fillForm(DEFAULT_CONFIG)
+    alert('Configuration réinitialisée. Rechargez index.html pour revenir aux valeurs par défaut.')
+}
+
+saveBtn.addEventListener('click', saveConfig)
+resetBtn.addEventListener('click', resetConfig)
+
+fillForm(loadConfig())
+</script>
+
+    <script type="module" src="firebase.js"></script>
+
+</body>
+</html>

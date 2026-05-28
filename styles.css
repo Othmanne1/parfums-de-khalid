@@ -1,0 +1,106 @@
+
+:root{
+	--accent:#8b5e3c;
+	--accent-2:#f2d6c9;
+	--dark:#111;
+	--muted:#717171;
+	--bg:#fbf9f7;
+}
+
+*{box-sizing:border-box}
+body{font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;padding:0;margin:0;color:var(--dark);background:var(--bg)}
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+.site-header{background:linear-gradient(90deg,rgba(255,255,255,0.9) 0%,rgba(250,246,242,0.9) 100%);backdrop-filter:blur(4px);border-bottom:1px solid rgba(0,0,0,0.04)}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;padding:1rem 1rem}
+h1{margin:0;font-size:1.4rem;color:var(--accent);letter-spacing:.4px}
+.config-link{display:inline-block;margin-top:.35rem;color:var(--dark);font-size:.9rem;text-decoration:none;opacity:.85}
+.config-link:hover{opacity:1}
+.cart-btn{background:var(--dark);color:#fff;border:none;padding:.5rem .8rem;border-radius:10px;cursor:pointer;box-shadow:0 6px 16px rgba(11,11,11,0.12)}
+.hero{display:flex;gap:1rem;align-items:center;margin:1.25rem 0}
+.hero-text h2{margin:.25rem 0;font-size:1.8rem}
+.hero-text p{color:var(--muted);margin-bottom:.6rem}
+.hero-image{flex:1;height:240px;background-image:url('https://source.unsplash.com/1200x800/?perfume,bottle');background-size:cover;background-position:center;border-radius:12px;position:relative;box-shadow:0 18px 40px rgba(15,15,15,.06);overflow:hidden}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.0) 0%,rgba(0,0,0,0.15) 45%,rgba(0,0,0,0.28) 100%);display:flex;align-items:flex-end;padding:1rem}
+.hero-caption{color:#fff;font-weight:600;background:linear-gradient(90deg,rgba(0,0,0,0.25),rgba(0,0,0,0.12));padding:.5rem .8rem;border-radius:8px}
+
+.section-title{margin:1rem 0;font-size:1.15rem}
+.about-section{display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;align-items:start;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(242,214,201,.7));padding:1.4rem;border-radius:18px;box-shadow:0 20px 45px rgba(0,0,0,.05);margin:2rem 0}
+.about-content p{color:var(--muted);line-height:1.8;margin-bottom:1rem;font-size:1rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.stat-card{background:#fff;border-radius:16px;padding:1rem 1.1rem;box-shadow:0 12px 24px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:.4rem;transition:transform .2s ease,box-shadow .2s ease}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 18px 32px rgba(0,0,0,.09)}
+.stat-card strong{font-size:1.35rem;color:var(--accent)}
+.stat-card span{color:var(--muted);font-size:.94rem}
+.why-us-section{margin:2rem 0}
+.why-us-grid{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:1rem}
+.why-card{background:#fff;border-radius:18px;padding:1.2rem;box-shadow:0 16px 30px rgba(0,0,0,.06);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.why-card:hover{transform:translateY(-5px);box-shadow:0 22px 38px rgba(0,0,0,.1);background:linear-gradient(180deg,rgba(242,214,201,.14),#fff)}
+.why-card h4{margin:0 0 .65rem 0;color:var(--accent)}
+.why-card p{margin:0;color:var(--muted);line-height:1.75}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.reviews-section{margin:2rem 0;}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.review-card{background:#fff;border-radius:16px;padding:1.2rem;box-shadow:0 16px 32px rgba(0,0,0,.06);transition:transform .26s ease,box-shadow .26s ease,background .26s ease;display:flex;flex-direction:column;gap:.75rem;min-height:190px}
+.review-card:hover{transform:translateY(-6px);box-shadow:0 22px 40px rgba(0,0,0,.1)}
+.review-stars{color:#d49f6b;font-size:1rem;letter-spacing:.06em}
+.review-card p{margin:0;color:var(--muted);line-height:1.65;flex:1}
+.review-card strong{color:var(--dark);font-weight:700}
+.card{background:linear-gradient(180deg,#fff, #fff);border-radius:12px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.06);display:flex;flex-direction:column;transition:transform .26s cubic-bezier(.2,.9,.2,1),box-shadow .26s,filter .26s}
+.card:hover{transform:translateY(-10px) rotate(-.5deg);box-shadow:0 20px 45px rgba(0,0,0,.12);filter:brightness(1.02)}
+.card img{width:100%;height:210px;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.03);transition:transform .4s ease,opacity .4s ease}
+.card:hover img{transform:scale(1.04)}
+.card h4{margin:0.6rem 0 0.2rem 0;font-size:1rem}
+.card p{margin:0;color:var(--muted);font-size:.9rem}
+.card .price{margin-top:.6rem;font-weight:800;color:var(--accent)}
+.card .actions{margin-top:auto;display:flex;gap:.5rem}
+.ribbon{position:absolute;left:12px;top:12px;background:var(--accent);color:#fff;padding:.25rem .6rem;border-radius:6px;font-size:.8rem;font-weight:700}
+.btn{padding:.55rem .65rem;border-radius:10px;border:1px solid #e7e3e0;background:#fff;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(0,0,0,.08)}
+.btn.primary{background:var(--accent);color:#fff;border:none;box-shadow:0 8px 20px rgba(139,94,60,0.18)}
+.btn.primary:hover{background:rgba(139,94,60,0.9)}
+.btn.small{padding:.45rem .6rem;font-size:.9rem}
+
+.hero{display:flex;gap:1rem;align-items:center;margin:1.25rem 0;animation:heroFade .9s ease-out forwards}
+.hero-text{opacity:0;animation:heroTextPop .9s ease-out 0.2s forwards}
+.hero-text h2{opacity:0;animation:heroTitleIn .9s ease-out 0.3s forwards}
+.hero-text p{opacity:0;animation:heroCopyIn .9s ease-out 0.45s forwards}
+.hero-text .btn{opacity:0;animation:heroButtonIn .9s ease-out 0.6s forwards}
+.hero-image{flex:1;height:240px;background-image:url('https://source.unsplash.com/1200x800/?perfume,bottle');background-size:cover;background-position:center;border-radius:12px;position:relative;box-shadow:0 18px 40px rgba(15,15,15,.06);overflow:hidden;animation:floatImage 8s ease-in-out infinite alternate}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.0) 0%,rgba(0,0,0,0.15) 45%,rgba(0,0,0,0.28) 100%);display:flex;align-items:flex-end;padding:1rem}
+.hero-caption{color:#fff;font-weight:600;background:linear-gradient(90deg,rgba(0,0,0,0.25),rgba(0,0,0,0.12));padding:.5rem .8rem;border-radius:8px}
+
+.fade-in{opacity:0;transform:translateY(10px);animation:fadeUp .6s forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+@keyframes heroFade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes heroTextPop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes heroTitleIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes heroCopyIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes heroButtonIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes floatImage{from{transform:translateY(0px)}to{transform:translateY(-12px)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+.cart-modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:60;opacity:0;transition:opacity .25s ease}
+.cart-modal:not(.hidden){opacity:1}
+.cart-panel{width:100%;max-width:520px;background:#fff;padding:1rem;border-radius:12px;position:relative;box-shadow:0 18px 40px rgba(0,0,0,.08);animation:slideUp .28s ease-out}
+.close{position:absolute;right:10px;top:8px;border:none;background:transparent;font-size:1rem;cursor:pointer}
+.cart-items{max-height:320px;overflow:auto;margin:0.5rem 0}
+.cart-item{display:flex;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid #f6f2ef;transition:background .2s ease}
+.cart-item:hover{background:rgba(139,94,60,.04)}
+.cart-item img{width:64px;height:64px;object-fit:cover;border-radius:8px;transition:transform .3s ease}
+.cart-item:hover img{transform:scale(1.03)}
+.qty{display:flex;align-items:center;gap:.4rem}
+.qty button{padding:.3rem .55rem;border-radius:8px;border:1px solid #eee;background:#fff;transition:background .2s ease,border-color .2s ease}
+.qty button:hover{background:#f7f3ee;border-color:rgba(139,94,60,.35)}
+.checkout-form label{display:block;margin:.6rem 0}
+.checkout-form input,.checkout-form textarea{width:100%;padding:.6rem;border-radius:10px;border:1px solid #eee;transition:border-color .2s ease,box-shadow .2s ease}
+.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(139,94,60,.12);outline:none}
+.form-actions{text-align:right;margin-top:.6rem}
+.site-footer{border-top:1px solid rgba(0,0,0,0.04);padding:1rem;margin-top:2rem;color:var(--muted);opacity:0;animation:fadeUp .8s ease .15s forwards}
+.footer-grid{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.footer-links a{color:var(--dark);text-decoration:none;font-weight:600;transition:color .2s ease}
+.footer-links a:hover{color:var(--accent)}
+.whatsapp-fab{position:fixed;right:1rem;bottom:1rem;background:#25d366;color:#fff;padding:.9rem 1rem;border-radius:999px;box-shadow:0 18px 35px rgba(0,0,0,.2);font-weight:700;text-decoration:none;z-index:80;transition:transform .2s ease,box-shadow .2s ease}
+.whatsapp-fab:hover{transform:translateY(-3px);box-shadow:0 22px 40px rgba(0,0,0,.22)}
+@media (max-width:900px){.about-section{grid-template-columns:1fr}.about-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.hero{flex-direction:column}.hero-image{height:220px}.about-section{padding:1rem}.about-stats{grid-template-columns:1fr}.footer-grid{flex-direction:column;align-items:center}}

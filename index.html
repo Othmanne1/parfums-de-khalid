@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Parfums de Khalid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Parfums de Khalid</h1>
+      <button id="cartBtn" class="cart-btn">Panier (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="hero" class="hero">
+      <div class="hero-text">
+        <h2 id="heroTitle">Les meilleurs parfums, livraison rapide</h2>
+        <p id="heroSubtitle">Choisissez, ajoutez au panier et commandez via WhatsApp.</p>
+        <p><button id="viewCollection" class="btn primary small">Voir la collection</button></p>
+      </div>
+      <div id="heroImage" class="hero-image">
+        <div class="hero-overlay">
+          <div id="heroCaption" class="hero-caption">Authentic fragrances · Qualité garantie</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-content">
+        <h3 class="section-title">À propos de Parfums de Khalid</h3>
+        <p>Nous sélectionnons des parfums originaux et des coffrets haut de gamme pour offrir une expérience olfactive unique au Maroc. Notre service est rapide, fiable et personnalisé.</p>
+        <p>Commandez facilement via WhatsApp, recevez votre parfum à domicile et profitez d’un suivi client dédié pour toute question ou conseil.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <strong>+200</strong>
+          <span>Clients satisfaits</span>
+        </div>
+        <div class="stat-card">
+          <strong>Livraison</strong>
+          <span>48h au Maroc</span>
+        </div>
+        <div class="stat-card">
+          <strong>Service</strong>
+          <span>Support WhatsApp</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us-section">
+      <h3 class="section-title">Pourquoi nous choisir</h3>
+      <div class="why-us-grid">
+        <div class="why-card">
+          <h4>Authenticité garantie</h4>
+          <p>Tous les parfums sont d’origine et sélectionnés avec soin, sans compromis sur la qualité.</p>
+        </div>
+        <div class="why-card">
+          <h4>Livraison rapide</h4>
+          <p>Nous offrons une livraison express au Maroc pour que vous receviez votre parfum dès que possible.</p>
+        </div>
+        <div class="why-card">
+          <h4>Support WhatsApp</h4>
+          <p>Posez vos questions, recevez des conseils et confirmez votre commande en quelques messages.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="section-title">Notre sélection</h3>
+      <div id="products" class="products-grid"></div>
+    </section>
+
+    <section class="reviews-section">
+      <h3 class="section-title">Avis clients</h3>
+      <div class="reviews-grid">
+        <article class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p>“Le parfum est superbe, la livraison a été très rapide et l’emballage impeccable. Je recommande vivement !”</p>
+          <strong>— Youssef, Casablanca</strong>
+        </article>
+        <article class="review-card fade-in" style="animation-delay:.1s">
+          <div class="review-stars">★★★★★</div>
+          <p>“J’ai choisi Bleu de Chanel et je suis enchanté. Le service client a été très professionnel.”</p>
+          <strong>— Salma, Rabat</strong>
+        </article>
+        <article class="review-card fade-in" style="animation-delay:.2s">
+          <div class="review-stars">★★★★★</div>
+          <p>“Produit authentique, odeur longue durée. Le prix est juste pour cette qualité.”</p>
+          <strong>— Omar, Marrakech</strong>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div id="cartModal" class="cart-modal hidden">
+    <div class="cart-panel">
+      <button id="closeCart" class="close">✕</button>
+      <h3>Votre panier</h3>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-summary">
+        <div>Total: <strong id="cartTotal">0</strong> DH</div>
+        <button id="checkoutBtn" class="btn primary">Commander</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="cart-modal hidden">
+    <div class="cart-panel">
+      <button id="closeCheckout" class="close">✕</button>
+      <h3>Informations de livraison</h3>
+      <form id="checkoutForm" class="checkout-form">
+        <label>Nom complet<input type="text" name="fullname" required></label>
+        <label>Numéro de téléphone<input type="tel" name="phone" required></label>
+        <label>Ville<input type="text" name="city" required></label>
+        <label>Adresse complète<textarea name="address" rows="2" required></textarea></label>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Envoyer la commande via WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>© Parfums de Khalid</div>
+      <div class="footer-links">
+        <a href="https://wa.me/212712233293?text=Bonjour%20Parfums%20de%20Khalid,%20j%27ai%20une%20question" target="_blank">WhatsApp</a>
+        <a href="#products">Produits</a>
+        <a href="#hero">Accueil</a>
+      </div>
+    </div>
+  </footer>
+  <a href="https://wa.me/212712233293?text=Bonjour%20Parfums%20de%20Khalid,%20j%27ai%20une%20question" target="_blank" class="whatsapp-fab">WhatsApp</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<script type="module" src="firebase.js"></script>
+<script src="script.js"></script>
