@@ -166,6 +166,9 @@ if (window.db) {
 
         if (firebaseProducts.length > 0) {
             PRODUCTS = firebaseProducts;
+            if (typeof SITE_CONFIG !== 'undefined') {
+                SITE_CONFIG.products = firebaseProducts;
+            }
         }
         
         applyHeroConfig();
