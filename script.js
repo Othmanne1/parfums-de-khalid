@@ -31,9 +31,9 @@ function loadSiteConfig(){
   return config;
 }
 
-const SITE_CONFIG = loadSiteConfig();
-const PRODUCTS = SITE_CONFIG.products;
-const WHATSAPP_NUMBER = SITE_CONFIG.whatsappNumber;
+let SITE_CONFIG = loadSiteConfig() || { hero: {}, products: [], whatsappNumber: "" };
+let PRODUCTS = SITE_CONFIG.products || [];
+let WHATSAPP_NUMBER = SITE_CONFIG.whatsappNumber || "";
 
 const $products = document.getElementById('products')
 const $cartCount = document.getElementById('cartCount')
@@ -46,7 +46,39 @@ const $closeCart = document.getElementById('closeCart')
 const $checkoutModal = document.getElementById('checkoutModal')
 const $closeCheckout = document.getElementById('closeCheckout')
 const $checkoutForm = document.getElementById('checkoutForm')
+// دالة لجلب البيانات لايف من Firebase وتحديث الصفحة الرئيسية
+function fetchLiveConfigFromFirebase() {
+    if (window.db) {
+        window.db.collection("siteConfig").doc("main").get()
+        .then((doc) => {
+            if (doc.exists) {
+                const liveConfig = doc.data();
+                console.log("تم جلب البيانات لايف من Firebase:", liveConfig);
+                
+                if (liveConfig.products) PRODUCTS = liveConfig.products;
+                if (liveConfig.whatsappNumber) WHATSAPP_NUMBER = liveConfig.whatsappNumber;
+                
+                if (liveConfig.hero) {
+                    const hTitle = document.getElementById('heroTitle') || document.querySelector('.hero h1');
+                    const hSub = document.getElementById('heroSubtitle') || document.querySelector('.hero p');
+                    if (hTitle && liveConfig.hero.title) hTitle.innerText = liveConfig.hero.title;
+                    if (hSub && liveConfig.hero.subtitle) hSub.innerText = liveConfig.hero.subtitle;
+                }
+                
+                // إعادة رسم السلعة الجديدة ف الشاشة
+                if (typeof renderProducts === 'function') {
+                    renderProducts();
+                }
+            }
+        })
+        .catch((err) => console.error("خطأ ف جلب داتا Firebase:", err));
+    }
+}
 
+// تشغيل الدالة مباشرة بعد تحميل الصفحة بـ ثانية
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(fetchLiveConfigFromFirebase, 1000);
+});
 // Clear cart on fresh page load
 localStorage.removeItem('cart');
 let cart = {}
