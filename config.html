@@ -206,23 +206,22 @@
 
     // إرسال التعديلات لـ Firebase لايف
     if (window.db) {
-        // استيراد دالات الحفظ الخاصة بالنسخة الجديدة ديناميكياً
-        import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js")
-        .then(({ doc, setDoc }) => {
-            return setDoc(doc(window.db, "config", "main"), config);
+        window.db.collection("siteConfig").doc("main").set(config)
+        .then(() => {
+            // كنزيدو نطلقوا الـ Build hook ديال Netlify باش يتحدث السيت كامل
+            return fetch('https://api.netlify.com/build_hooks/6a18ac540a469');
         })
         .then(() => {
-           setTimeout(() => { fetch('https://api.netlify.com/build_hooks/6a18ac540a469a34a01cf6bd').then(() => console.log('Netlify Rebuild Started!')).catch(err => console.error(err)); }, 3000); alert('تم حفظ التعديلات بنجاح فـ Firebase والموقع كيتحدث دابا!');
+            alert("البشارة أخويا عثمان! تم الحفظ ف Firebase وبدأ تحديث الموقع بنجاح!");
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
-            alert('وقع خطأ أثناء الحفظ في Firebase');
+            alert("وقع خطأ أثناء الحفظ فـ Firebase: " + error.message);
         });
     } else {
-        alert('تنبيه: التعديل تم محلياً فقط لأن Firebase غير متصل');
+        alert("تنبيه Firebase: التعديل تم محلياً فقط لأن السيرفر غير متصل!");
     }
 }
-
 function resetConfig(){
     localStorage.removeItem('siteConfig')
     fillForm(DEFAULT_CONFIG)
