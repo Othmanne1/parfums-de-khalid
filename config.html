@@ -203,12 +203,10 @@
 
     // حفظ كاحتياط في المتصفح
     localStorage.setItem('siteConfig', JSON.stringify(config));
-
-    // إرسال التعديلات لـ Firebase لايف
+// إرسال التعديلات لـ Firebase لايف
     if (window.db) {
         window.db.collection("siteConfig").doc("main").set(config)
         .then(() => {
-            // كنزيدو نطلقوا الـ Build hook ديال Netlify باش يتحدث السيت كامل
             return fetch('https://api.netlify.com/build_hooks/6a18ac540a469');
         })
         .then(() => {
