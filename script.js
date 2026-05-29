@@ -158,7 +158,7 @@ function applyHeroConfig(){
 }
 
 if (window.db) {
-    window.db.collection("products").get().then((snapshot) => {
+    window.db.collection("products").onSnapshot((snapshot) => {
         const firebaseProducts = [];
         snapshot.forEach((doc) => {
             firebaseProducts.push({ id: doc.id, ...doc.data() });
@@ -174,7 +174,7 @@ if (window.db) {
         applyHeroConfig();
         renderProducts();
         updateCartCount();
-    }).catch(err => console.error("Firebase load error:", err));
+    }, (err) => console.error("Firebase live load error:", err));
 } else {
     applyHeroConfig();
     renderProducts();
